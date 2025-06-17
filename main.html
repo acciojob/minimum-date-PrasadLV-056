@@ -1,16 +1,44 @@
+
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Minimum Date Finder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    input, button {
+      margin: 5px 0;
+      padding: 8px;
+    }
+  </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+  <h1>Find the Minimum Date</h1>
+  <p>Enter dates in the format: YYYY/MM/DD (one per line)</p>
+  <textarea id="datesInput" rows="6" cols="30" placeholder="2023/03/01&#10;2023/03/02&#10;2022/12/31"></textarea><br>
+  <button onclick="showMinDate()">Get Minimum Date</button>
 
+  <h2>Minimum Date:</h2>
+  <p id="result"></p>
+
+  <script>
+    function minDate(dates) {
+      return dates.reduce((min, curr) => curr < min ? curr : min);
+    }
+
+    function showMinDate() {
+      const input = document.getElementById('datesInput').value;
+      const datesArray = input.split('\n').map(date => date.trim()).filter(date => date);
+      if (datesArray.length === 0) {
+        document.getElementById('result').innerText = "Please enter at least one date.";
+        return;
+      }
+      const result = minDate(datesArray);
+      document.getElementById('result').innerText = result;
+    }
+  </script>
 </body>
-
 </html>
